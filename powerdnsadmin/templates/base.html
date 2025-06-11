@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class>
+<html id="html-root" class>
 <head>
     {% block head %}
         <meta charset="utf-8">
@@ -37,6 +37,19 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+                        <i class="fa-solid fa-language"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item lang-select" data-lang="en">
+                            <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> English
+                        </a>
+                        <a href="#" class="dropdown-item lang-select" data-lang="zh">
+                            <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> 中文
+                        </a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link no-prompt" data-widget="fullscreen" href="#" role="button">
                         <i class="fa-solid fa-expand-arrows-alt"></i>
@@ -70,26 +83,26 @@
                     <div class="info">
                         <p>{{ current_user.firstname }} {{ current_user.lastname }}</p>
                         <span>
-                            <a href="{{ url_for('user.profile') }}"><i class="nav-icon fa-solid fa-user"></i> Edit Profile</a>
+                            <a href="{{ url_for('user.profile') }}"><i class="nav-icon fa-solid fa-user"></i> <span data-i18n="Edit Profile">Edit Profile</span></a>
                             &nbsp;|&nbsp;
-                            <a href="{{ url_for('index.logout') }}"><i class="nav-icon fa-solid fa-sign-out-alt"></i> Logout</a>
+                            <a href="{{ url_for('index.logout') }}"><i class="nav-icon fa-solid fa-sign-out-alt"></i> <span data-i18n="Logout">Logout</span></a>
                         </span>
                     </div>
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                    <li class="nav-header">Zone Management</li>
+                    <li class="nav-header" data-i18n="Zone Management">Zone Management</li>
                     <li class="{{ 'nav-item active' if active_page == 'nav-item dashboard' else 'nav-item' }}">
                         <a href="{{ url_for('dashboard.dashboard') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-tachometer-alt"></i>
-                            <p>Dashboard</p>
+                            <p data-i18n="Dashboard">Dashboard</p>
                         </a>
                     </li>
                     {% if SETTING.get('allow_user_create_domain') or current_user.role.name in ['Administrator', 'Operator'] %}
                         <li class="{{ 'nav-item active' if active_page == 'nav-item new_domain' else 'nav-item' }}">
                             <a href="{{ url_for('domain.add') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Create Zone</p>
+                                <p data-i18n="Create Zone">Create Zone</p>
                             </a>
                         </li>
                     {% endif %}
@@ -97,22 +110,22 @@
                         <li class="{{ 'nav-item active' if active_page == 'remove_domain' else 'nav-item' }}">
                             <a href="{{ url_for('domain.remove') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-trash-alt"></i>
-                                <p>Remove Zone</p>
+                                <p data-i18n="Remove Zone">Remove Zone</p>
                             </a>
                         </li>
                     {% endif %}
-                    <li class="nav-header">Administration</li>
+                    <li class="nav-header" data-i18n="Administration">Administration</li>
                     <li class="{{ 'nav-item active' if active_page == 'admin_global_search' else 'nav-item' }}">
                         <a href="{{ url_for('admin.global_search') }}" class="nav-link">
                             <i class="nav-icon fa-solid fa-search"></i>
-                            <p>Global Search</p>
+                            <p data-i18n="Global Search">Global Search</p>
                         </a>
                     </li>
                     {% if current_user.role.name in ['Administrator', 'Operator'] or SETTING.get('allow_user_view_history') %}
                         <li class="{{ 'nav-item active' if active_page == 'admin_history' else 'nav-item' }}">
                             <a href="{{ url_for('admin.history') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-timeline"></i>
-                                <p>Activity</p>
+                                <p data-i18n="Activity">Activity</p>
                             </a>
                         </li>
                     {% endif %}
@@ -120,44 +133,44 @@
                         <li class="{{ 'nav-item active' if active_page == 'server_statistics' else 'nav-item' }}">
                             <a href="{{ url_for('admin.server_statistics') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-chart-simple"></i>
-                                <p>Server Statistics</p>
+                                <p data-i18n="Server Statistics">Server Statistics</p>
                             </a>
                         </li>
                         <li class="{{ 'nav-item active' if active_page == 'server_configuration' else 'nav-item' }}">
                             <a href="{{ url_for('admin.server_configuration') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-cog"></i>
-                                <p>Server Configuration</p>
+                                <p data-i18n="Server Configuration">Server Configuration</p>
                             </a>
                         </li>
                         <li class="{{ 'nav-item active' if active_page == 'admin_domain_template' else 'nav-item' }}">
                             <a href="{{ url_for('admin.templates') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-clone"></i>
-                                <p>Zone Templates</p>
+                                <p data-i18n="Zone Templates">Zone Templates</p>
                             </a>
                         </li>
                         <li class="{{ 'nav-item active' if active_page == 'admin_accounts' else 'nav-item' }}">
                             <a href="{{ url_for('admin.manage_account') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-users-rectangle"></i>
-                                <p>Accounts</p>
+                                <p data-i18n="Accounts">Accounts</p>
                             </a>
                         </li>
                         <li class="{{ 'nav-item active' if active_page == 'admin_users' else 'nav-item' }}">
                             <a href="{{ url_for('admin.manage_user') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-users"></i>
-                                <p>Users</p>
+                                <p data-i18n="Users">Users</p>
                             </a>
                         </li>
                         <li class="{{ 'nav-item active' if active_page == 'admin_keys' else 'nav-item' }}">
                             <a href="{{ url_for('admin.manage_keys') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-key"></i>
-                                <p>API Keys</p>
+                                <p data-i18n="API Keys">API Keys</p>
                             </a>
                         </li>
                         <li class="{{ 'nav-item active' if active_page == 'admin_settings' else 'nav-item' }}">
                             <a href="#" class="nav-link no-prompt">
                                 <i class="nav-icon fa-solid fa-cog"></i>
                                 <p>
-                                    Settings
+                                    <span data-i18n="Settings">Settings</span>
                                     <i class="right fa-solid fa-angle-left"></i>
                                 </p>
                             </a>
@@ -166,26 +179,26 @@
                                 <li class="nav-item">
                                     <a href="{{ url_for('admin.setting_basic') }}" class="nav-link">
                                         <i class="nav-icon fa-solid fa-gears"></i>
-                                        <p>Basic</p>
+                                        <p data-i18n="Basic">Basic</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url_for('admin.setting_records') }}" class="nav-link">
                                         <i class="nav-icon fa-regular fa-rectangle-list"></i>
-                                        <p>Zone Records</p>
+                                        <p data-i18n="Zone Records">Zone Records</p>
                                     </a>
                                 </li>
                                 {% if current_user.role.name == 'Administrator' %}
                                     <li class="nav-item">
                                         <a href="{{ url_for('admin.setting_pdns') }}" class="nav-link">
                                             <i class="nav-icon fa-solid fa-server"></i>
-                                            <p>Server</p>
+                                            <p data-i18n="Server">Server</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ url_for('admin.setting_authentication') }}" class="nav-link">
                                             <i class="nav-icon fa-solid fa-user-shield"></i>
-                                            <p>Authentication</p>
+                                            <p data-i18n="Authentication">Authentication</p>
                                         </a>
                                     </li>
                                 {% endif %}
@@ -226,8 +239,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong><a href="https://github.com/PowerDNS-Admin/PowerDNS-Admin">PowerDNS-Admin</a></strong> - A PowerDNS web
-        interface with advanced features.
+        <strong><a href="https://github.com/PowerDNS-Admin/PowerDNS-Admin">PowerDNS-Admin</a></strong> - <span data-i18n="A PowerDNS web interface with advanced features">A PowerDNS web interface with advanced features</span>.
         <span class="float-right">Version 0.4.2</span>
     </footer>
 </div>
@@ -354,7 +366,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Error</h4>
+                    <h4 class="modal-title" data-i18n="Error">Error</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -363,7 +375,7 @@
                     <p></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">
+                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal" data-i18n="Close">
                         Close
                     </button>
                 </div>
@@ -375,7 +387,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Success</h4>
+                    <h4 class="modal-title" data-i18n="Success">Success</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -384,7 +396,7 @@
                     <p></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">
+                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal" data-i18n="Close">
                         Close
                     </button>
                 </div>
@@ -395,19 +407,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Session timeout warning</h4>
+                    <h4 class="modal-title" data-i18n="Session timeout warning">Session timeout warning</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Your session is about to expire. You will be automatically signed out in</p>
+                    <p data-i18n="Your session is about to expire. You will be automatically signed out in">Your session is about to expire. You will be automatically signed out in</p>
                     <h3><span id="modal-time"></span></h3>
-                    <p>To coninue your ssession, select <strong>Stay Signed In</strong></p>
+                    <p><span data-i18n="To coninue your ssession, select">To coninue your ssession, select</span> <strong data-i18n="Stay Signed In">Stay Signed In</strong></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success float-right button_stay_signed_in"
-                            data-dismiss="modal">
+                            data-dismiss="modal" data-i18n="Stay Signed In">
                         Stay Signed In
                     </button>
-                    <button type="button" class="btn btn-danger float-left button_sign_out" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger float-left button_sign_out" data-dismiss="modal" data-i18n="Sign Out">
                         Sign Out
                     </button>
                 </div>

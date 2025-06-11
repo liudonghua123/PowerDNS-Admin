@@ -58,6 +58,8 @@ js_main = Bundle(
     'node_modules/jtimeout/src/jTimeout.js',
     'node_modules/jquery.quicksearch/src/jquery.quicksearch.js',
     'node_modules/knockout/build/output/knockout-latest.js',
+    'custom/js/i18n.js',
+    'custom/js/language-switcher.js',
     'custom/js/app-authentication-settings-editor.js',
     'custom/js/custom.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',

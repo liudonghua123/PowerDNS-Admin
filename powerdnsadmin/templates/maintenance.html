@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" class>
+<html id="html-root" lang="en" class>
 <head>
-    <title>Site Maintenance</title>
+    <title><span data-i18n="Site Maintenance">Site Maintenance</span></title>
     <style>
         body {
             text-align: center;
@@ -36,14 +36,34 @@
     </style>
 </head>
 <body>
+<!-- Language Switcher -->
+<div class="language-switcher" style="position: absolute; top: 10px; right: 10px;">
+    <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-language"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
+            <a href="#" class="dropdown-item lang-select" data-lang="en">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> English
+            </a>
+            <a href="#" class="dropdown-item lang-select" data-lang="zh">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> 中文
+            </a>
+        </div>
+    </div>
+</div>
 <article>
-    <h1>We&rsquo;ll be back soon!</h1>
+    <h1><span data-i18n="We'll be back soon!">We&rsquo;ll be back soon!</span></h1>
     <div>
-        <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. Please contact the
+        <p><span data-i18n="Sorry for the inconvenience but we're performing some maintenance at the moment. Please contact the System Administrator if you need more information, otherwise we'll be back online shortly!">Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. Please contact the
             System
-            Administrator if you need more information, otherwise we&rsquo;ll be back online shortly!</p>
-        <p>&mdash; Team</p>
+            Administrator if you need more information, otherwise we&rsquo;ll be back online shortly!</span></p>
+        <p><span data-i18n="— Team">&mdash; Team</span></p>
     </div>
 </article>
+<script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
+<script src="{{ url_for('static', filename='custom/js/i18n.js') }}"></script>
+<script src="{{ url_for('static', filename='custom/js/language-switcher.js') }}"></script>
 </body>
 </html>

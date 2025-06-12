@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% set active_page = "new_domain" %}
-{% block title %}<title>Create Zone - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Create Zone">Create Zone</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">
+                    <h1 class="m-0 text-dark" data-i18n="Create Zone">
                         Create Zone
                     </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">New Zone</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active" data-i18n="New Zone">New Zone</li>
                     </ol>
                 </div>
             </div>
@@ -31,72 +31,72 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                         <div class="card card-outline card-primary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Zone Editor</h3>
+                                <h3 class="card-title" data-i18n="Zone Editor">Zone Editor</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="domain_name">Zone Name</label>
+                                    <label for="domain_name" data-i18n="Zone Name">Zone Name</label>
                                     <input type="text" class="form-control" name="domain_name" id="domain_name"
-                                           placeholder="Enter a valid zone name (required)">
+                                           placeholder="Enter a valid zone name (required)" data-i18n-placeholder="Enter a valid zone name (required)">
                                 </div>
                                 {% if domain_override_toggle == True %}
                                     <div class="form-group">
                                         <input type="checkbox" id="domain_override" name="domain_override"
                                                class="checkbox">
                                         &nbsp;
-                                        <label for="domain_override">Zone Override Record</label>
+                                        <label for="domain_override" data-i18n="Zone Override Record">Zone Override Record</label>
                                     </div>
                                 {% endif %}
                                 <div class="form-group">
-                                    <label for="selAccount">Account</label>
+                                    <label for="selAccount" data-i18n="Account">Account</label>
                                     <select name="accountid" id="selAccount" class="form-control">
-                                        <option value="0">- No Account -</option>
+                                        <option value="0" data-i18n="- No Account -">- No Account -</option>
                                         {% for account in accounts %}
                                             <option value="{{ account.id }}">{{ account.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Zone Type</label>
+                                    <label data-i18n="Zone Type">Zone Type</label>
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="radio_type" id="radio_type_native" value="native"
                                                    checked>
-                                            Native
+                                            <span data-i18n="Native">Native</span>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="radio_type" id="radio_type_primary"
                                                    value="primary">
-                                            Primary
+                                            <span data-i18n="Primary">Primary</span>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="radio_type" id="radio_type_secondary"
                                                    value="slave">
-                                            Secondary
+                                            <span data-i18n="Secondary">Secondary</span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group" style="display: none;" id="domain_master_address_div">
                                     <input type="text" class="form-control" name="domain_master_address"
                                            id="domain_master_address"
-                                           placeholder="Enter valid Primary Server IP addresses (separated by commas)">
+                                           placeholder="Enter valid Primary Server IP addresses (separated by commas)" data-i18n-placeholder="Enter valid Primary Server IP addresses (separated by commas)">
                                 </div>
                                 <div class="form-group">
-                                    <label for="domain_template">Zone Template</label>
+                                    <label for="domain_template" data-i18n="Zone Template">Zone Template</label>
                                     <select class="form-control" id="domain_template" name="domain_template">
-                                        <option value="0">No template</option>
+                                        <option value="0" data-i18n="No template">No template</option>
                                         {% for template in templates %}
                                             <option value="{{ template.id }}">{{ template.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>SOA-EDIT-API</label>
+                                    <label data-i18n="SOA-EDIT-API">SOA-EDIT-API</label>
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="radio_type_soa_edit_api" id="radio_default"
@@ -128,12 +128,12 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="button" title="Cancel" class="btn btn-secondary"
+                                <button type="button" title="Cancel" data-i18n-title="Cancel" class="btn btn-secondary"
                                         onclick="window.location.href='{{ url_for('dashboard.dashboard') }}'">
-                                    <i class="fa-solid fa-window-close"></i>&nbsp;Cancel
+                                    <i class="fa-solid fa-window-close"></i>&nbsp;<span data-i18n="Cancel">Cancel</span>
                                 </button>
-                                <button type="submit" title="Create Zone" class="btn btn-primary float-right">
-                                    <i class="fa-solid fa-save"></i>&nbsp;Create Zone
+                                <button type="submit" title="Create Zone" data-i18n-title="Create Zone" class="btn btn-primary float-right">
+                                    <i class="fa-solid fa-save"></i>&nbsp;<span data-i18n="Create Zone">Create Zone</span>
                                 </button>
                             </div>
                             <!-- /.card-footer -->
@@ -145,65 +145,56 @@
                 <div class="col-12 col-sm-6 col-lg-8">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Zone Editor Help</h3>
+                            <h3 class="card-title" data-i18n="Zone Editor Help">Zone Editor Help</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <dl class="dl-horizontal">
-                                <dt>Zone Name</dt>
-                                <dd>Enter your zone name in the format of name.tld (eg. powerdns-admin.com). You can
+                                <dt data-i18n="Zone Name">Zone Name</dt>
+                                <dd data-i18n="Enter your zone name in the format of name.tld (eg. powerdns-admin.com). You can also enter sublevel zones to create delegate zones (eg. sub.powerdns-admin.com) which can be useful for delegating control to other users.">Enter your zone name in the format of name.tld (eg. powerdns-admin.com). You can
                                     also enter sublevel zones to create delegate zones (eg. sub.powerdns-admin.com)
                                     which can be useful for delegating control to other users.
                                 </dd>
-                                <dt>Zone Override Record</dt>
-                                <dd>When enabled, this will allow the user to by-pass validation errors if the user
+                                <dt data-i18n="Zone Override Record">Zone Override Record</dt>
+                                <dd data-i18n="When enabled, this will allow the user to by-pass validation errors if the user doesn't have administration rights to a parent zone.">When enabled, this will allow the user to by-pass validation errors if the user
                                     doesn't have administration rights to a parent zone.
                                 </dd>
-                                <dt>Account</dt>
-                                <dd>Specifies the PowerDNS account value to use for the zone.</dd>
-                                <dt>Zone Type</dt>
-                                <dd>The type decides how the zone will be replicated across multiple DNS servers.
+                                <dt data-i18n="Account">Account</dt>
+                                <dd data-i18n="Specifies the PowerDNS account value to use for the zone.">Specifies the PowerDNS account value to use for the zone.</dd>
+                                <dt data-i18n="Zone Type">Zone Type</dt>
+                                <dd data-i18n="The type decides how the zone will be replicated across multiple DNS servers.">The type decides how the zone will be replicated across multiple DNS servers.
                                     <ul>
                                         <li>
-                                            <strong>Native</strong> - The server will not perform any Primary or Secondary
-                                            zone functions.
+                                            <strong data-i18n="Native">Native</strong> - <span data-i18n="The server will not perform any Primary or Secondary zone functions.">The server will not perform any Primary or Secondary zone functions.</span>
                                         </li>
                                         <li>
-                                            <strong>Primary</strong> - The server will serve as the Primary and will send
-                                            zone transfers (AXFRs) to other servers configured as secondaries.
+                                            <strong data-i18n="Primary">Primary</strong> - <span data-i18n="The server will serve as the Primary and will send zone transfers (AXFRs) to other servers configured as secondaries.">The server will serve as the Primary and will send zone transfers (AXFRs) to other servers configured as secondaries.</span>
                                         </li>
                                         <li>
-                                            <strong>Secondary</strong> - The server will serve as the Secondary and will
-                                            request and receive zone transfers (AXFRs) from other servers configured as
-                                            Primaries.
+                                            <strong data-i18n="Secondary">Secondary</strong> - <span data-i18n="The server will serve as the Secondary and will request and receive zone transfers (AXFRs) from other servers configured as Primaries.">The server will serve as the Secondary and will request and receive zone transfers (AXFRs) from other servers configured as Primaries.</span>
                                         </li>
                                     </ul>
                                 </dd>
-                                <dt>Zone Template</dt>
-                                <dd>Specifies the existing zone template which this zone should initially be replicated
+                                <dt data-i18n="Zone Template">Zone Template</dt>
+                                <dd data-i18n="Specifies the existing zone template which this zone should initially be replicated from.">Specifies the existing zone template which this zone should initially be replicated
                                     from.
                                 </dd>
-                                <dt>SOA-EDIT-API</dt>
-                                <dd>The SOA-EDIT-API setting defines how the SOA serial number will be updated after a
+                                <dt data-i18n="SOA-EDIT-API">SOA-EDIT-API</dt>
+                                <dd data-i18n="The SOA-EDIT-API setting defines how the SOA serial number will be updated after a change is made to the zone.">The SOA-EDIT-API setting defines how the SOA serial number will be updated after a
                                     change is
                                     made to the zone.
                                     <ul>
                                         <li>
-                                            <strong>DEFAULT</strong> - Generate a soa serial of YYYYMMDD01. If the current serial
-                                            is lower than
-                                            the generated serial, use the generated serial. If the current serial is
-                                            higher or
-                                            equal to the generated serial, increase the current serial by 1.
+                                            <strong data-i18n="DEFAULT">DEFAULT</strong> - <span data-i18n="Generate a soa serial of YYYYMMDD01. If the current serial is lower than the generated serial, use the generated serial. If the current serial is higher or equal to the generated serial, increase the current serial by 1.">Generate a soa serial of YYYYMMDD01. If the current serial is lower than the generated serial, use the generated serial. If the current serial is higher or equal to the generated serial, increase the current serial by 1.</span>
                                         </li>
                                         <li>
-                                            <strong>INCREASE</strong> - Increase the current serial by 1.
+                                            <strong data-i18n="INCREASE">INCREASE</strong> - <span data-i18n="Increase the current serial by 1.">Increase the current serial by 1.</span>
                                         </li>
                                         <li>
-                                            <strong>EPOCH</strong> - Change the serial to the number of seconds since the EPOCH,
-                                            AKA UNIX timestamps
+                                            <strong data-i18n="EPOCH">EPOCH</strong> - <span data-i18n="Change the serial to the number of seconds since the EPOCH, AKA UNIX timestamps">Change the serial to the number of seconds since the EPOCH, AKA UNIX timestamps</span>
                                         </li>
                                         <li>
-                                            <strong>OFF</strong> - Disable automatic updates of the SOA serial.
+                                            <strong data-i18n="OFF">OFF</strong> - <span data-i18n="Disable automatic updates of the SOA serial.">Disable automatic updates of the SOA serial.</span>
                                         </li>
                                     </ul>
                                 </dd>
@@ -253,7 +244,7 @@
         <div class="modal-dialog">
             <div class="modal-content modal-sm">
                 <div class="modal-header alert-danger">
-                    <h4 class="modal-title">
+                    <h4 class="modal-title" data-i18n="WARNING">
                         WARNING
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -266,7 +257,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary center-block" data-dismiss="modal"
-                            id="button_confirm_warn_modal">
+                            id="button_confirm_warn_modal" data-i18n="CLOSE">
                         CLOSE
                     </button>
                 </div>

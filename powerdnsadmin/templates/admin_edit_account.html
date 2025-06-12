@@ -7,20 +7,20 @@
     {% set action_label = 'Edit' %}
     {% set form_action = url_for('admin.edit_account', account_name=account.name) %}
 {% endif %}
-{% block title %}<title>{{ action_label }} Account - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="{{ action_label }} Account">{{ action_label }} Account</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">{{ action_label }} Account</h1>
+                    <h1 class="m-0 text-dark" data-i18n="{{ action_label }} Account">{{ action_label }} Account</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_account') }}">Accounts</a></li>
-                        <li class="breadcrumb-item active">{{ action_label }} Account</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_account') }}" data-i18n="Accounts">Accounts</a></li>
+                        <li class="breadcrumb-item active" data-i18n="{{ action_label }} Account">{{ action_label }} Account</li>
                     </ol>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         <input type="hidden" name="create" value="{{ create }}">
                         <div class="card card-outline card-primary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Account Editor</h3>
+                                <h3 class="card-title" data-i18n="Account Editor">Account Editor</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -47,44 +47,44 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                                             &times;
                                         </button>
-                                        <h4><i class="fa-solid fa-ban"></i> Error!</h4>
+                                        <h4><i class="fa-solid fa-ban"></i> <span data-i18n="Error">Error</span>!</h4>
                                         {{ error }}
                                     </div>
                                     <span class="help-block">{{ error }}</span>
                                 {% endif %}
                                 <div
                                     class="form-group has-feedback {% if invalid_accountname or duplicate_accountname %}has-error{% endif %}">
-                                    <label class="control-label" for="accountname">Name</label>
-                                    <input type="text" class="form-control" placeholder="Account Name (required)"
+                                    <label class="control-label" for="accountname" data-i18n="Name">Name</label>
+                                    <input type="text" class="form-control" data-i18n-placeholder="Account Name (required)" placeholder="Account Name (required)"
                                            name="accountname" id="accountname"
                                            {% if account %}value="{{ account.name }}" {% endif %}
                                            {% if not create %}disabled{% endif %} required>
                                     <span class="form-control-feedback"></span>
                                     {% if invalid_accountname %}
-                                        <span class="help-block text-danger">Cannot be blank and must only contain alphanumeric
+                                        <span class="help-block text-danger" data-i18n="Cannot be blank and must only contain alphanumeric characters{% if SETTING.get('account_name_extra_chars') %}, dots, hyphens or underscores{% endif %}.">Cannot be blank and must only contain alphanumeric
                     characters{% if SETTING.get('account_name_extra_chars') %}, dots, hyphens or underscores{% endif %}.
                   </span>
                                     {% elif duplicate_accountname %}
-                                        <span class="help-block text-danger">Account name already in use.</span>
+                                        <span class="help-block text-danger" data-i18n="Account name already in use.">Account name already in use.</span>
                                     {% endif %}
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="accountdescription">Description</label>
-                                    <input type="text" class="form-control" placeholder="Account Description (optional)"
+                                    <label class="control-label" for="accountdescription" data-i18n="Description">Description</label>
+                                    <input type="text" class="form-control" data-i18n-placeholder="Account Description (optional)" placeholder="Account Description (optional)"
                                            name="accountdescription" id="accountdescription"
                                            {% if account %}value="{{ account.description }}" {% endif %}>
                                     <span class="orm-control-feedback"></span>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="accountcontact">Contact Person</label>
-                                    <input type="text" class="form-control" placeholder="Contact Person (optional)"
+                                    <label class="control-label" for="accountcontact" data-i18n="Contact Person">Contact Person</label>
+                                    <input type="text" class="form-control" data-i18n-placeholder="Contact Person (optional)" placeholder="Contact Person (optional)"
                                            name="accountcontact" id="accountcontact"
                                            {% if account %}value="{{ account.contact }}" {% endif %}>
                                     <span class="form-control-feedback"></span>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="accountmail">Mail Address</label>
-                                    <input type="email" class="form-control" placeholder="Mail Address (optional)"
+                                    <label class="control-label" for="accountmail" data-i18n="Mail Address">Mail Address</label>
+                                    <input type="email" class="form-control" data-i18n-placeholder="Mail Address (optional)" placeholder="Mail Address (optional)"
                                            name="accountmail" id="accountmail"
                                            {% if account %}value="{{ account.mail }}" {% endif %}>
                                     <span class="form-control-feedback"></span>
@@ -92,14 +92,14 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-header">
-                                <h3 class="card-title">Access Control</h3>
+                                <h3 class="card-title" data-i18n="Access Control">Access Control</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <p>Users on the right have access to manage records in all zones
+                                <p data-i18n="Users on the right have access to manage records in all zones associated with the account.">Users on the right have access to manage records in all zones
                                     associated with the account.
                                 </p>
-                                <p>Click on users to move between columns.</p>
+                                <p data-i18n="Click on users to move between columns.">Click on users to move between columns.</p>
                                 <div class="form-group col-2">
                                     <select multiple="multiple" class="form-control" id="account_multi_user"
                                             name="account_multi_user">
@@ -113,12 +113,12 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-body">
-                                <p>Zones on the right are associated with the account. Red marked zone names are
+                                <p data-i18n="Zones on the right are associated with the account. Red marked zone names are already associated with other accounts. Moving already associated zones to this account will overwrite the previous associated account.">Zones on the right are associated with the account. Red marked zone names are
                                     already associated with other accounts.
                                     Moving already associated zones to this account will overwrite the previous
                                     associated account.
                                 </p>
-                                <p>Hover over the red zone names to show the associated account. Click on zones to
+                                <p data-i18n="Hover over the red zone names to show the associated account. Click on zones to move between columns.">Hover over the red zone names to show the associated account. Click on zones to
                                     move between columns.</p>
                                 <div class="form-group col-2">
                                     <select multiple="multiple" class="form-control" id="account_domains"
@@ -144,12 +144,12 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="button" class="btn btn-secondary float-left" title="Cancel"
+                                <button type="button" class="btn btn-secondary float-left" data-i18n="Cancel" title="Cancel"
                                         onclick="window.location.href='{{ url_for('admin.manage_account') }}'">
                                     Cancel
                                 </button>
                                 <button type="submit" class="btn btn-primary float-right"
-                                        title="{{ action_label }} Account">
+                                        title="{{ action_label }} Account" data-i18n="{{ action_label }} Account">
                                     {{ action_label }} Account
                                 </button>
                             </div>
@@ -163,30 +163,30 @@
                 <div class="col-12 col-sm-6 col-lg-8">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Account Editor Help</h3>
+                            <h3 class="card-title" data-i18n="Account Editor Help">Account Editor Help</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <p>
+                            <p data-i18n="An account allows grouping of zones belonging to a particular entity, such as a customer or department.">
                                 An account allows grouping of zones belonging to a particular entity, such as a
                                 customer or
                                 department.
                             </p>
-                            <p>
+                            <p data-i18n="A zone can be assigned to an account upon zone creation or through the zone administration page.">
                                 A zone can be assigned to an account upon zone creation or through the zone
                                 administration
                                 page.
                             </p>
-                            <p>Fill in all the fields to the in the form to the left.</p>
+                            <p data-i18n="Fill in all the fields to the in the form to the left.">Fill in all the fields to the in the form to the left.</p>
                             <p>
-                                <strong>Name</strong> is an account identifier. It will be lowercase and can contain
+                                <strong data-i18n="Name">Name</strong> <span data-i18n="is an account identifier. It will be lowercase and can contain alphanumeric characters{% if SETTING.get('account_name_extra_chars') %}, dots, hyphens and underscores (no space or other special character is allowed){% else %} (no extra character is allowed){% endif %}.">is an account identifier. It will be lowercase and can contain
                                 alphanumeric
                                 characters{% if SETTING.get('account_name_extra_chars') %}, dots, hyphens and
                                 underscores (no space or other special character is allowed)
-                            {% else %} (no extra character is allowed){% endif %}.<br/>
-                                <strong>Description</strong> is a user-friendly name for this account.<br/>
-                                <strong>Contact person</strong> is the name of a contact person at the account.<br/>
-                                <strong>Mail Address</strong> is an e-mail address for the contact person.
+                            {% else %} (no extra character is allowed){% endif %}.</span><br/>
+                                <strong data-i18n="Description">Description</strong> <span data-i18n="is a user-friendly name for this account.">is a user-friendly name for this account.</span><br/>
+                                <strong data-i18n="Contact Person">Contact person</strong> <span data-i18n="is the name of a contact person at the account.">is the name of a contact person at the account.</span><br/>
+                                <strong data-i18n="Mail Address">Mail Address</strong> <span data-i18n="is an e-mail address for the contact person.">is an e-mail address for the contact person.</span>
                             </p>
                         </div>
                         <!-- /.card-body -->
@@ -205,8 +205,8 @@
     <script>
         function addMultiSelect(id, placeholder) {
             $(id).multiSelect({
-                selectableHeader: `<input type='text' class='search-input' autocomplete='off' placeholder='${placeholder}'>`,
-                selectionHeader: `<input type='text' class='search-input' autocomplete='off' placeholder='${placeholder}'>`,
+                selectableHeader: `<input type='text' class='search-input' autocomplete='off' placeholder='${placeholder}' data-i18n-placeholder='${placeholder}'>`,
+                selectionHeader: `<input type='text' class='search-input' autocomplete='off' placeholder='${placeholder}' data-i18n-placeholder='${placeholder}'>`,
                 afterInit: function (ms) {
                     var that = this,
                         $selectableSearch = that.$selectableUl.prev(),
@@ -241,7 +241,7 @@
             });
         }
 
-        addMultiSelect("#account_multi_user", "Username")
-        addMultiSelect("#account_domains", "Zone")
+        addMultiSelect("#account_multi_user", i18n.t("Username"))
+        addMultiSelect("#account_domains", i18n.t("Zone"))
     </script>
 {% endblock %}

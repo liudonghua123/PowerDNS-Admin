@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% set active_page = "admin_settings" %}
-{% block title %}<title>Authentication Settings - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Authentication Settings">Authentication Settings</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Authentication Settings</h1>
+                    <h1 class="m-0 text-dark" data-i18n="Authentication Settings">Authentication Settings</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active">Authentication Settings</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Home">Home</a></li>
+                        <li class="breadcrumb-item" data-i18n="Settings">Settings</li>
+                        <li class="breadcrumb-item active" data-i18n="Authentication Settings">Authentication Settings</li>
                     </ol>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <form id="settings-editor">
                         <div class="card card-outline card-primary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Settings Editor</h3>
+                                <h3 class="card-title" data-i18n="Settings Editor">Settings Editor</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -46,23 +46,23 @@
                                     <button type="button" class="close" aria-hidden="true"
                                             data-bind="click: saved(false)">×
                                     </button>
-                                    <h5><i class="icon fas fa-check"></i> Saved!</h5>
-                                    These settings have been saved to the database.
+                                    <h5><i class="icon fas fa-check"></i> <span data-i18n="Saved">Saved</span>!</h5>
+                                    <span data-i18n="These settings have been saved to the database">These settings have been saved to the database.</span>
                                 </div>
                                 <div class="alert alert-dismissible alert-danger" style="display: none;"
                                      data-bind="visible: save_failed">
                                     <button type="button" class="close" aria-hidden="true"
                                             data-bind="click: save_failed(false)">×
                                     </button>
-                                    <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                                    These settings could <strong>not</strong> be saved to the database!
+                                    <h5><i class="icon fas fa-ban"></i> <span data-i18n="Error">Error</span>!</h5>
+                                    <span data-i18n="These settings could not be saved to the database">These settings could <strong>not</strong> be saved to the database!</span>
                                 </div>
                                 <div class="alert alert-dismissible" style="display: none;"
                                      data-bind="visible: messages().length, class: 'alert alert-dismissible alert-' + messages_class()">
                                     <button type="button" class="close" aria-hidden="true"
                                             data-bind="click: messages([])">×
                                     </button>
-                                    <h5><i class="icon fas fa-info"></i> Additional Information</h5>
+                                    <h5><i class="icon fas fa-info"></i> <span data-i18n="Additional Information">Additional Information</span></h5>
                                     <ul data-bind="foreach: messages">
                                         <li data-bind="text: $data"></li>
                                     </ul>
@@ -72,7 +72,7 @@
                                         <li class="nav-item">
                                             <a data-tab="local"
                                                data-bind="click: onTabClick, class: 'nav-link' + (tab_active() == 'local' ? ' active' : '')"
-                                               href="#" data-toggle="pill" role="tab">Local</a>
+                                               href="#" data-toggle="pill" role="tab" data-i18n="Local">Local</a>
                                         </li>
                                         <li class="nav-item">
                                             <a data-tab="ldap"
@@ -82,26 +82,22 @@
                                         <li class="nav-item">
                                             <a data-tab="google"
                                                data-bind="click: onTabClick, class: 'nav-link' + (tab_active() == 'google' ? ' active' : '')"
-                                               href="#" data-toggle="pill" role="tab">Google
-                                                OAuth</a>
+                                               href="#" data-toggle="pill" role="tab"><span data-i18n="Google OAuth">Google OAuth</span></a>
                                         </li>
                                         <li class="nav-item">
                                             <a data-tab="github"
                                                data-bind="click: onTabClick, class: 'nav-link' + (tab_active() == 'github' ? ' active' : '')"
-                                               href="#" data-toggle="pill" role="tab">GitHub
-                                                OAuth</a>
+                                               href="#" data-toggle="pill" role="tab"><span data-i18n="GitHub OAuth">GitHub OAuth</span></a>
                                         </li>
                                         <li class="nav-item">
                                             <a data-tab="azure"
                                                data-bind="click: onTabClick, class: 'nav-link' + (tab_active() == 'azure' ? ' active' : '')"
-                                               href="#" data-toggle="pill" role="tab">Azure
-                                                OAuth</a>
+                                               href="#" data-toggle="pill" role="tab"><span data-i18n="Azure OAuth">Azure OAuth</span></a>
                                         </li>
                                         <li class="nav-item">
                                             <a data-tab="oidc"
                                                data-bind="click: onTabClick, class: 'nav-link' + (tab_active() == 'oidc' ? ' active' : '')"
-                                               href="#" data-toggle="pill" role="tab">OpenID
-                                                Connect OAuth</a>
+                                               href="#" data-toggle="pill" role="tab"><span data-i18n="OpenID Connect OAuth">OpenID Connect OAuth</span></a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -112,7 +108,7 @@
                                                 <div class="col-12 col-sm-6 col-lg-4">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h3 class="card-title">Local Authentication Settings</h3>
+                                                            <h3 class="card-title" data-i18n="Local Authentication Settings">Local Authentication Settings</h3>
                                                         </div>
                                                         <!-- /.card-header -->
                                                         <div class="card-body">
@@ -121,61 +117,54 @@
                                                                        name="local_db_enabled"
                                                                        class="checkbox"
                                                                        data-bind="checked: local_db_enabled">
-                                                                <label for="local_db_enabled">Local DB
-                                                                    Authentication</label>
+                                                                <label for="local_db_enabled" data-i18n="Local DB Authentication">Local DB Authentication</label>
                                                             </div>
                                                             <div class="form-group">
                                                                 <input type="checkbox" id="signup_enabled"
                                                                        name="signup_enabled"
                                                                        class="checkbox"
                                                                        data-bind="enable: local_db_enabled, checked: signup_enabled">
-                                                                <label for="signup_enabled">Allow users to sign
-                                                                    up</label>
+                                                                <label for="signup_enabled" data-i18n="Allow users to sign up">Allow users to sign up</label>
                                                             </div>
                                                             <fieldset>
-                                                                <legend>Password Requirements</legend>
+                                                                <legend data-i18n="Password Requirements">Password Requirements</legend>
                                                                 <div class="form-group">
                                                                     <input type="checkbox" id="pwd_enforce_characters"
                                                                            name="pwd_enforce_characters"
                                                                            class="checkbox"
                                                                            data-bind="enable: local_db_enabled, checked: pwd_enforce_characters">
-                                                                    <label for="pwd_enforce_characters">
-                                                                        Enforce Character Requirements
-                                                                    </label>
+                                                                    <label for="pwd_enforce_characters" data-i18n="Enforce Character Requirements">
+                                                        Enforce Character Requirements
+                                                    </label>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="pwd_min_len">Minimum Password
-                                                                        Length</label>
+                                                                    <label for="pwd_min_len" data-i18n="Minimum Password Length">Minimum Password Length</label>
                                                                     <input type="text" class="form-control"
                                                                            name="pwd_min_len" id="pwd_min_len"
                                                                            data-bind="enable: local_db_enabled() && pwd_enforce_characters(), value: pwd_min_len, valueUpdate: 'afterkeydown'">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="pwd_min_lowercase">Minimum Lowercase
-                                                                        Characters</label>
+                                                                    <label for="pwd_min_lowercase" data-i18n="Minimum Lowercase Characters">Minimum Lowercase Characters</label>
                                                                     <input type="text" class="form-control"
                                                                            name="pwd_min_lowercase"
                                                                            id="pwd_min_lowercase"
                                                                            data-bind="enable: local_db_enabled() && pwd_enforce_characters(), value: pwd_min_lowercase, valueUpdate: 'afterkeydown'">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="pwd_min_uppercase">Minimum Uppercase
-                                                                        Characters</label>
+                                                                    <label for="pwd_min_uppercase" data-i18n="Minimum Uppercase Characters">Minimum Uppercase Characters</label>
                                                                     <input type="text" class="form-control"
                                                                            name="pwd_min_uppercase"
                                                                            id="pwd_min_uppercase"
                                                                            data-bind="enable: local_db_enabled() && pwd_enforce_characters(), value: pwd_min_uppercase, valueUpdate: 'afterkeydown'">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="pwd_min_digits">Minimum Digit
-                                                                        Characters</label>
+                                                                    <label for="pwd_min_digits" data-i18n="Minimum Digit Characters">Minimum Digit Characters</label>
                                                                     <input type="text" class="form-control"
                                                                            name="pwd_min_digits" id="pwd_min_digits"
                                                                            data-bind="enable: local_db_enabled() && pwd_enforce_characters(), value: pwd_min_digits, valueUpdate: 'afterkeydown'">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="pwd_min_special">Minimum Special
-                                                                        Characters</label>
+                                                                    <label for="pwd_min_special" data-i18n="Minimum Special Characters">Minimum Special Characters</label>
                                                                     <input type="text" class="form-control"
                                                                            name="pwd_min_special" id="pwd_min_special"
                                                                            data-bind="enable: local_db_enabled() && pwd_enforce_characters(), value: pwd_min_special, valueUpdate: 'afterkeydown'">
@@ -185,13 +174,12 @@
                                                                            name="pwd_enforce_complexity"
                                                                            class="checkbox"
                                                                            data-bind="enable: local_db_enabled, checked: pwd_enforce_complexity">
-                                                                    <label for="pwd_enforce_complexity">
-                                                                        Enforce Complexity Requirement
-                                                                    </label>
+                                                                    <label for="pwd_enforce_complexity" data-i18n="Enforce Complexity Requirement">
+                                                        Enforce Complexity Requirement
+                                                    </label>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="pwd_min_complexity">Minimum Complexity
-                                                                        (zxcvbn)</label>
+                                                                    <label for="pwd_min_complexity" data-i18n="Minimum Complexity (zxcvbn)">Minimum Complexity (zxcvbn)</label>
                                                                     <input type="text" class="form-control"
                                                                            name="pwd_min_complexity"
                                                                            id="pwd_min_complexity"

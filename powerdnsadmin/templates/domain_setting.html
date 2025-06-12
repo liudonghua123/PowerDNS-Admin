@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}<title>Edit Zone - {{ domain.name | pretty_domain_name }} - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Edit Zone">Edit Zone</span> - {{ domain.name | pretty_domain_name }} - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     {% if status %}
@@ -24,13 +24,13 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        Edit Zone - {{ domain.name | pretty_domain_name }}
+                        <span data-i18n="Edit Zone">Edit Zone</span> - {{ domain.name | pretty_domain_name }}
                     </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Edit Zone - {{ domain.name | pretty_domain_name }}</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><span data-i18n="Edit Zone">Edit Zone</span> - {{ domain.name | pretty_domain_name }}</li>
                     </ol>
                 </div>
             </div>
@@ -50,12 +50,12 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                         <div class="card card-outline card-secondary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Change Zone Account</h3>
+                                <h3 class="card-title" data-i18n="Change Zone Account">Change Zone Account</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="selAccountId">Account</label>
+                                    <label for="selAccountId" data-i18n="Account">Account</label>
                                     <select id="selAccountId" name="accountid" class="form-control" style="width:15em;">
                                         <option value="0">- No Account -</option>
                                         {% for account in accounts %}
@@ -71,7 +71,7 @@
                             <div class="card-footer">
                                 <button type="submit" title="Update Account" class="btn btn-primary"
                                         id="change_soa_edit_api">
-                                    <i class="fa-solid fa-floppy-disk"></i>&nbsp;Update Account
+                                    <i class="fa-solid fa-floppy-disk"></i>&nbsp;<span data-i18n="Update Account">Update Account</span>
                                 </button>
                             </div>
                             <!-- /.card-footer -->
@@ -84,24 +84,18 @@
                 <div class="col-12 col-sm-4">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Auto PTR creation</h3>
+                            <h3 class="card-title" data-i18n="Auto PTR creation">Auto PTR creation</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <input type="checkbox" id="chkAutoPtr" class="auto_ptr_toggle"
-                                       data-zone="{{ domain.name }}"
-                                       {% for setting in domain.settings %}{% if setting.setting=='auto_ptr' and setting.value=='True' %}checked
-                                       {% endif %}{% endfor %}
-                                       {% if SETTING.get('auto_ptr') %}disabled="True" {% endif %}>
-                                &nbsp;
-                                <label for="chkAutoPtr">Allow automatic reverse pointer creation on record
-                                    updates?</label>
-                                {% if SETTING.get('auto_ptr') %}
-                                    <p><code>Auto-ptr is enabled globally on the PDA system!</code></p>
-                                {% endif %}
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input auto_ptr_toggle" id="auto_ptr_toggle"
+                                           data-zone="{{ domain.name }}" {{ 'checked' if domain.settings.auto_ptr }}>
+                                    <label class="custom-control-label" for="auto_ptr_toggle" data-i18n="Allow automatic reverse pointer creation on record updates?">Allow automatic reverse pointer creation on record updates?</label>
+                                </div>
                             </div>
-                            <!-- /.form-group -->
+                            <p data-i18n="This setting is only effective if the global setting for Auto PTR is enabled.">This setting is only effective if the global setting for Auto PTR is enabled.</p>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -112,7 +106,7 @@
                 <div class="col-12 col-sm-4">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">DynDNS 2 Settings</h3>
+                            <h3 class="card-title" data-i18n="DynDNS 2 Settings">DynDNS 2 Settings</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -122,7 +116,7 @@
                                        {% for setting in domain.settings %}{% if setting.setting=='create_via_dyndns' and setting.value=='True' %}checked
                                        {% endif %}{% endfor %}>
                                 &nbsp;
-                                <label for="chkDynDns">Allow on-demand creation of records via DynDNS updates?</label>
+                                <label for="chkDynDns" data-i18n="Allow on-demand creation of records via DynDNS updates?">Allow on-demand creation of records via DynDNS updates?</label>
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -141,18 +135,18 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                         <div class="card card-outline card-secondary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Zone Access Control</h3>
+                                <h3 class="card-title" data-i18n="Zone Access Control">Zone Access Control</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <p>Users on the right have access to manage the records in
+                                        <p data-i18n="Users on the right have access to manage the records in the zone.">Users on the right have access to manage the records in
                                             the {{ domain.name | pretty_domain_name }} zone.</p>
-                                        <p>Click on users to move from between columns.</p>
+                                        <p data-i18n="Click on users to move from between columns.">Click on users to move from between columns.</p>
                                         <p>
-                                            Users in <font style="color: red;">red</font> are Administrators
-                                            and already have access to <b>ALL</b> zones.
+                                            <span data-i18n="Users in red are Administrators and already have access to ALL zones.">Users in <font style="color: red;">red</font> are Administrators
+                                            and already have access to <b>ALL</b> zones.</span>
                                         </p>
                                     </div>
                                 </div>
@@ -177,7 +171,7 @@
                             <div class="card-footer">
                                 <button type="submit" title="Save Changes" class="btn btn-primary">
                                     <i class="fa-solid fa-floppy-disk"></i>
-                                    Save Changes
+                                    <span data-i18n="Save Changes">Save Changes</span>
                                 </button>
                             </div>
                             <!-- /.card-footer -->
@@ -299,17 +293,17 @@
                 <div class="col-12">
                     <div class="card card-outline card-danger shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Remove Zone</h3>
+                            <h3 class="card-title" data-i18n="Remove Zone">Remove Zone</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <p>This function is used to remove a zone from PowerDNS-Admin <b>AND</b> PowerDNS. All
+                            <p data-i18n="This function is used to remove a zone from PowerDNS-Admin AND PowerDNS. All records and user privileges associated with this zone will also be removed. This change cannot be reverted.">This function is used to remove a zone from PowerDNS-Admin <b>AND</b> PowerDNS. All
                                 records and
                                 user privileges associated with this zone will also be removed. This change cannot be
                                 reverted.</p>
                             <button type="button" title="Delete Zone" class="btn btn-danger float-left delete_domain"
-                                    id="{{ domain.name }}">
-                                <i class="fa-solid fa-trash"></i>&nbsp;Delete Zone
+                                    id="{{ domain.name }}" data-i18n-title="Delete Zone">
+                                <i class="fa-solid fa-trash"></i>&nbsp;<span data-i18n="Delete Zone">Delete Zone</span>
                             </button>
                         </div>
                         <!-- /.card-body -->
@@ -406,7 +400,11 @@
         $(document.body).on('click', '.delete_domain', function () {
             var modal = $("#modal_delete_domain");
             var domain = $(this).prop('id');
-            var info = "Are you sure you want to delete " + domain + "?";
+            var deleteConfirmMsg = "Are you sure you want to delete ";
+            if (typeof(i18n) !== 'undefined') {
+                deleteConfirmMsg = i18n.t('Are you sure you want to delete');
+            }
+            var info = deleteConfirmMsg + " " + domain + "?";
             modal.find('.modal-body p').text(info);
             modal.find('#button_delete_confirm').click(function () {
                 $.post($SCRIPT_ROOT + '/domain/setting/' + domain + '/delete', {
@@ -437,7 +435,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Confirmation</h4>
+                    <h4 class="modal-title" data-i18n="Confirmation">Confirmation</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -446,8 +444,8 @@
                     <p></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="button_delete_confirm">
+                    <button type="button" class="btn btn-secondary float-left" data-dismiss="modal" data-i18n="Close">Close</button>
+                    <button type="button" class="btn btn-danger" id="button_delete_confirm" data-i18n="Delete">
                         Delete
                     </button>
                 </div>

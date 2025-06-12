@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% set active_page = "user_profile" %}
-{% block title %}<title>Edit Profile - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Edit Profile">Edit Profile</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Edit Profile</h1>
+                    <h1 class="m-0 text-dark" data-i18n="Edit Profile">Edit Profile</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Edit Profile</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active" data-i18n="Edit Profile">Edit Profile</li>
                     </ol>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="col-12 col-sm-6">
                     <div class="card card-outline card-primary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Profile Editor</h3>
+                            <h3 class="card-title" data-i18n="Profile Editor">Profile Editor</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -35,20 +35,20 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link {{ 'active' if not error_messages else '' }}" href="#tabs-personal" data-toggle="tab">
-                                            Personal Info
+                                            <span data-i18n="Personal Info">Personal Info</span>
                                         </a>
                                     </li>
                                     {% if session['authentication_type'] == 'LOCAL' %}
                                         <li class="nav-item">
                                             <a class="nav-link {{ 'active' if 'password' in error_messages else '' }}" href="#tabs-password" data-toggle="tab">
-                                                Change Password
+                                                <span data-i18n="Change Password">Change Password</span>
                                             </a>
                                         </li>
                                     {% endif %}
                                     {% if session['authentication_type'] in ['LOCAL', 'LDAP'] %}
                                         <li class="nav-item">
                                             <a class="nav-link" href="#tabs-authentication" data-toggle="tab">
-                                                Authentication
+                                                <span data-i18n="Authentication">Authentication</span>
                                             </a>
                                         </li>
                                     {% endif %}
@@ -62,19 +62,19 @@
                                     <form role="form" method="post" action="{{ user_profile }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                                         <div class="form-group">
-                                            <label for="firstname">First Name</label>
+                                            <label for="firstname" data-i18n="First Name">First Name</label>
                                             <input type="text" class="form-control" name="firstname"
                                                    id="firstname" placeholder="{{ current_user.firstname }}"
                                                    {% if session['authentication_type'] != 'LOCAL' %}disabled{% endif %}>
                                         </div>
                                         <div class="form-group">
-                                            <label for="lastname">Last Name</label>
+                                            <label for="lastname" data-i18n="Last Name">Last Name</label>
                                             <input type="text" class="form-control" name="lastname"
                                                    id="lastname" placeholder="{{ current_user.lastname }}"
                                                    {% if session['authentication_type'] != 'LOCAL' %}disabled{% endif %}>
                                         </div>
                                         <div class="form-group">
-                                            <label for="email">E-Mail</label> <input type="email"
+                                            <label for="email" data-i18n="E-Mail">E-Mail</label> <input type="email"
                                                                                      class="form-control"
                                                                                      name="email" id="email"
                                                                                      placeholder="{{ current_user.email }}"
@@ -82,8 +82,8 @@
                                         </div>
                                         {% if session['authentication_type'] == 'LOCAL' %}
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary" title="Save Profile">
-                                                    <i class="fa-solid fa-floppy-disk"></i>&nbsp;Save Profile
+                                                <button type="submit" class="btn btn-primary" title="Save Profile" data-i18n-title="Save Profile">
+                                                    <i class="fa-solid fa-floppy-disk"></i>&nbsp;<span data-i18n="Save Profile">Save Profile</span>
                                                 </button>
                                             </div>
                                         {% endif %}
@@ -95,14 +95,13 @@
                                     <div class="tab-pane fade {{ 'show active' if 'password' in error_messages else '' }}"
                                             id="tabs-password">
                                         {% if not current_user.password %}
-                                            Your account password is managed via LDAP which isn't supported to
-                                            change here.
+                                            <span data-i18n="Your account password is managed via LDAP which isn't supported to change here">Your account password is managed via LDAP which isn't supported to change here.</span>
                                         {% else %}
                                             <form action="{{ user_profile }}" method="post">
                                                 <input type="hidden" name="_csrf_token"
                                                        value="{{ csrf_token() }}">
                                                 <div class="form-group">
-                                                    <label for="password">New Password</label>
+                                                    <label for="password" data-i18n="New Password">New Password</label>
                                                     <input type="password" class="form-control {{ 'is-invalid' if 'password' in error_messages else '' }}"
                                                            name="password"
                                                            id="newpassword">
@@ -114,13 +113,13 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="rpassword">Re-type New Password</label>
+                                                    <label for="rpassword" data-i18n="Re-type New Password">Re-type New Password</label>
                                                     <input type="password" class="form-control" name="rpassword"
                                                            id="rpassword">
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary" title="Save Password">
-                                                        <i class="fa-solid fa-floppy-disk"></i>&nbsp;Save Password
+                                                    <button type="submit" class="btn btn-primary" title="Save Password" data-i18n-title="Save Password">
+                                                        <i class="fa-solid fa-floppy-disk"></i>&nbsp;<span data-i18n="Save Password">Save Password</span>
                                                     </button>
                                                 </div>
                                             </form>
@@ -135,14 +134,14 @@
                                         <div class="form-group">
                                             <input type="checkbox" id="otp_toggle" class="otp_toggle"
                                                    {% if current_user.otp_secret %}checked{% endif %}>
-                                            <label for="otp_toggle">Enable Two Factor Authentication</label>
+                                            <label for="otp_toggle" data-i18n="Enable Two Factor Authentication">Enable Two Factor Authentication</label>
                                             {% if current_user.otp_secret %}
                                                 <div id="token_information">
                                                     <p>
                                                         <img id="qrcode" src="{{ url_for('user.qrcode') }}">
                                                     </p>
                                                     <div style="position: relative; left: 15px">
-                                                        Your secret key is:
+                                                        <span data-i18n="Your secret key is">Your secret key is:</span>
                                                         <br/>
                                                         <form>
                                                             <input type=text id="otp_secret"
@@ -157,26 +156,24 @@
                                                                   style="visibility:collapse">Copied.</span>
                                                         </form>
                                                     </div>
-                                                    You can use Google Authenticator
+                                                    <span data-i18n="You can use Google Authenticator">You can use Google Authenticator</span>
                                                     (<a target="_blank"
                                                         href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"><i
                                                     class="fa-brands fa-google-play"></i>Android</a>
                                                     - <a target="_blank"
                                                          href="https://apps.apple.com/us/app/google-authenticator/id388497605"><i
                                                     class="fa-brands fa-app-store-ios"></i>iOS</a>)
-                                                    or FreeOTP
+                                                    <span data-i18n="or">or</span> FreeOTP
                                                     (<a target="_blank"
                                                         href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp&hl=en"><i
                                                     class="fa-brands fa-google-play"></i>Android</a>
                                                     - <a target="_blank"
                                                          href="https://itunes.apple.com/en/app/freeotp-authenticator/id872559395?mt=8"><i
                                                     class="fa-brands fa-app-store-ios"></i>iOS</a>)
-                                                    on your smartphone to scan the QR code.
+                                                    <span data-i18n="on your smartphone to scan the QR code">on your smartphone to scan the QR code.</span>
                                                     <br/>
                                                     <p style="color: red; font-style: italic; font-weight: bold;">
-                                                        Make sure only you can see this QR Code and
-                                                                secret key and
-                                                                nobody can capture them.
+                                                        <span data-i18n="Make sure only you can see this QR Code and secret key and nobody can capture them">Make sure only you can see this QR Code and secret key and nobody can capture them.</span>
                                                     </p>
                                                 </div>
                                             {% endif %}

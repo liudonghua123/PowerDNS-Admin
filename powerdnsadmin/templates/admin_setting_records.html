@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% set active_page = "admin_settings" %}
-{% block title %}<title>Zone Record Settings - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Zone Record Settings">Zone Record Settings</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Zone Record Settings</h1>
+                    <h1 class="m-0 text-dark"><span data-i18n="Zone Record Settings">Zone Record Settings</span></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Zone Record Settings</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}"><span data-i18n="Dashboard">Dashboard</span></a></li>
+                        <li class="breadcrumb-item active"><span data-i18n="Zone Record Settings">Zone Record Settings</span></li>
                     </ol>
                 </div>
             </div>
@@ -30,16 +30,16 @@
                         <input type="hidden" name="create" value="{{ create }}">
                         <div class="card card-outline card-primary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Settings Editor</h3>
+                                <h3 class="card-title"><span data-i18n="Settings Editor">Settings Editor</span></h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>#</th>
-                                        <th>Record</th>
-                                        <th>Forward Zone</th>
-                                        <th>Reverse Zone</th>
+                                        <th><span data-i18n="#">#</span></th>
+                                        <th><span data-i18n="Record">Record</span></th>
+                                        <th><span data-i18n="Forward Zone">Forward Zone</span></th>
+                                        <th><span data-i18n="Reverse Zone">Reverse Zone</span></th>
                                     </tr>
                                     {% for record in f_records %}
                                         <tr>
@@ -61,8 +61,8 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary float-right" title="Save Settings">
-                                    <i class="fa-solid fa-save"></i>&nbsp;Save Settings
+                                <button type="submit" class="btn btn-primary float-right" title="Save Settings" data-i18n-title="Save Settings">
+                                    <i class="fa-solid fa-save"></i>&nbsp;<span data-i18n="Save Settings">Save Settings</span>
                                 </button>
                             </div>
                             <!-- /.card-footer -->
@@ -75,16 +75,17 @@
                 <div class="col-12 col-sm-6 col-lg-8">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Settings Editor Help</h3>
+                            <h3 class="card-title"><span data-i18n="Settings Editor Help">Settings Editor Help</span></h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <p>Select record types you allow user to edit in the forward zone and reverse zone. Take a
-                                look at
+                            <p><span data-i18n="Select record types you allow user to edit in the forward zone and reverse zone. Take a look at">Select record types you allow user to edit in the forward zone and reverse zone. Take a
+                                look at</span>
                                 <a href="https://doc.powerdns.com/authoritative/appendices/types.html" target="_blank">PowerDNS
                                     docs</a>
+                                <span data-i18n="for full list of supported record types.">
                                 for
-                                full list of supported record types.
+                                full list of supported record types.</span>
                             </p>
                         </div>
                         <!-- /.card-body -->

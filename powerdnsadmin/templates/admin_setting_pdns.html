@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% set active_page = "admin_settings" %}
-{% block title %}<title>Server Settings - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Server Settings">Server Settings</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Server Settings</h1>
+                    <h1 class="m-0 text-dark" data-i18n="Server Settings">Server Settings</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Server Settings</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active" data-i18n="Server Settings">Server Settings</li>
                     </ol>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                         <div class="card card-outline card-primary shadow">
                             <div class="card-header">
-                                <h3 class="card-title">Settings Editor</h3>
+                                <h3 class="card-title" data-i18n="Settings Editor">Settings Editor</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -38,40 +38,40 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                                             &times;
                                         </button>
-                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
-                                        Please complete your PowerDNS API configuration before continuing
+                                        <h4><i class="icon fa fa-ban"></i> <span data-i18n="Error">Error</span>!</h4>
+                                        <span data-i18n="Please complete your PowerDNS API configuration before continuing">Please complete your PowerDNS API configuration before continuing</span>
                                     </div>
                                 {% endif %}
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="pdns_api_url">PowerDNS API URL</label>
+                                    <label class="control-label" for="pdns_api_url" data-i18n="PowerDNS API URL">PowerDNS API URL</label>
                                     <input type="url" class="form-control" placeholder="PowerDNS API URL"
                                            name="pdns_api_url" id="pdns_api_url"
-                                           data-error="Please input a valid PowerDNS API URL" required
+                                           data-error="Please input a valid PowerDNS API URL" data-i18n-error="pdns_api_url" required
                                            value="{{ pdns_api_url }}">
                                     <span class="help-block with-errors"></span>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="pdns_api_key">PowerDNS API Key</label>
+                                    <label class="control-label" for="pdns_api_key" data-i18n="PowerDNS API Key">PowerDNS API Key</label>
                                     <input type="password" class="form-control" placeholder="PowerDNS API Key"
                                            name="pdns_api_key" id="pdns_api_key"
-                                           data-error="Please input a valid PowerDNS API key"
+                                           data-error="Please input a valid PowerDNS API key" data-i18n-error="pdns_api_key"
                                            required
                                            value="{{ pdns_api_key }}">
                                     <span class="help-block with-errors"></span>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="pdns_version">PowerDNS Version</label>
+                                    <label class="control-label" for="pdns_version" data-i18n="PowerDNS Version">PowerDNS Version</label>
                                     <input type="text" class="form-control" placeholder="PowerDNS Version"
                                            name="pdns_version" id="pdns_version"
-                                           data-error="Please input PowerDNS version" required
+                                           data-error="Please input PowerDNS version" data-i18n-error="pdns_version" required
                                            value="{{ pdns_version }}">
                                     <span class="help-block with-errors"></span>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary float-right" title="Save Settings">
-                                    <i class="fa-solid fa-save"></i>&nbsp;Save Settings
+                                <button type="submit" class="btn btn-primary float-right" title="Save Settings" data-i18n-title="Save Settings">
+                                    <i class="fa-solid fa-save"></i>&nbsp;<span data-i18n="Save Settings">Save Settings</span>
                                 </button>
                             </div>
                             <!-- /.card-footer -->
@@ -84,20 +84,20 @@
                 <div class="col-12 col-sm-6 col-lg-8">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Settings Editor</h3>
+                            <h3 class="card-title" data-i18n="Settings Editor">Settings Editor</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <dl class="dl-horizontal">
-                                <p>You must configure the API connection information before PowerDNS-Admin can query
+                                <p data-i18n="You must configure the API connection information before PowerDNS-Admin can query your PowerDNS data. Following fields are required">You must configure the API connection information before PowerDNS-Admin can query
                                     your
                                     PowerDNS data. Following fields are required:</p>
-                                <dt>PowerDNS API URL</dt>
-                                <dd>Your PowerDNS API URL (eg. http://127.0.0.1:8081/).</dd>
-                                <dt>PowerDNS API Key</dt>
-                                <dd>Your PowerDNS API key.</dd>
-                                <dt>PowerDNS Version</dt>
-                                <dd>Your PowerDNS version number (eg. 4.7.0).</dd>
+                                <dt data-i18n="PowerDNS API URL">PowerDNS API URL</dt>
+                                <dd data-i18n="Your PowerDNS API URL (eg. http://127.0.0.1:8081/)">Your PowerDNS API URL (eg. http://127.0.0.1:8081/).</dd>
+                                <dt data-i18n="PowerDNS API Key">PowerDNS API Key</dt>
+                                <dd data-i18n="Your PowerDNS API key">Your PowerDNS API key.</dd>
+                                <dt data-i18n="PowerDNS Version">PowerDNS Version</dt>
+                                <dd data-i18n="Your PowerDNS version number (eg. 4.7.0)">Your PowerDNS version number (eg. 4.7.0).</dd>
                             </dl>
                             <p>Find more details at
                                 <a href="https://doc.powerdns.com/md/httpapi/README/" target="_blank">https://doc.powerdns.com/md/httpapi/README/</a>

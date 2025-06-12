@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html id="html-root">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Email Confirmation - {{ SITE_NAME }}</title>
+    <title><span data-i18n="Email Confirmation">Email Confirmation</span> - {{ SITE_NAME }}</title>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -13,32 +13,48 @@
     <![endif]-->
 </head>
 <body class="hold-transition register-page">
+<!-- Language Switcher -->
+<div class="language-switcher" style="position: absolute; top: 10px; right: 10px;">
+    <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-language"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
+            <a href="#" class="dropdown-item lang-select" data-lang="en">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> English
+            </a>
+            <a href="#" class="dropdown-item lang-select" data-lang="zh">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> 中文
+            </a>
+        </div>
+    </div>
+</div>
 <section class="content">
     <div class="error-page">
         <div class="error-content">
             {% if status == 1 %}
                 <h3>
-                    <i class="fa fa-thumbs-o-up text-success"></i> Email verification successful!
+                    <i class="fa fa-thumbs-o-up text-success"></i> <span data-i18n="Email verification successful!">Email verification successful!</span>
                 </h3>
                 <p>
-                    You have confirmed your account. <a href="{{ url_for('index.login') }}">Click here</a> to login.
+                    <span data-i18n="You have confirmed your account.">You have confirmed your account.</span> <a href="{{ url_for('index.login') }}"><span data-i18n="Click here">Click here</span></a> <span data-i18n="to login.">to login.</span>
                 </p>
             {% elif status == 2 %}
                 <h3>
-                    <i class="fa fa-hand-stop-o text-info"></i> Already verified!
+                    <i class="fa fa-hand-stop-o text-info"></i> <span data-i18n="Already verified!">Already verified!</span>
                 </h3>
                 <p>
-                    You have confirmed your account already. <a href="{{ url_for('index.login') }}">Click here</a> to
-                    login.
+                    <span data-i18n="You have confirmed your account already.">You have confirmed your account already.</span> <a href="{{ url_for('index.login') }}"><span data-i18n="Click here">Click here</span></a> <span data-i18n="to login.">to
+                    login.</span>
                 </p>
             {% else %}
                 <h3>
-                    <i class="fa fa-warning text-yellow"></i> Email verification failed!
+                    <i class="fa fa-warning text-yellow"></i> <span data-i18n="Email verification failed!">Email verification failed!</span>
                 </h3>
                 <p>
-                    The confirmation link is invalid or has expired. <a
-                    href="{{ url_for('index.resend_confirmation_email') }}">Click here</a> if you want to resend a new
-                    link.
+                    <span data-i18n="The confirmation link is invalid or has expired.">The confirmation link is invalid or has expired.</span> <a
+                    href="{{ url_for('index.resend_confirmation_email') }}"><span data-i18n="Click here">Click here</span></a> <span data-i18n="if you want to resend a new link.">if you want to resend a new
+                    link.</span>
                 </p>
             {% endif %}
         </div>
@@ -46,6 +62,8 @@
     </div>
     <!-- /.error-page -->
 </section>
+{% assets "js_login" -%}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{%- endassets %}
 </body>
-
 </html>

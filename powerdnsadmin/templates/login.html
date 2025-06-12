@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html id="html-root">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Log In - {{ SITE_NAME }}</title>
+    <title><span data-i18n="Log In">Log In</span> - {{ SITE_NAME }}</title>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -16,6 +16,22 @@
     {% endif %}
 </head>
 <body class="hold-transition login-page">
+<!-- Language Switcher -->
+<div class="language-switcher" style="position: absolute; top: 10px; right: 10px;">
+    <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-language"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
+            <a href="#" class="dropdown-item lang-select" data-lang="en">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> English
+            </a>
+            <a href="#" class="dropdown-item lang-select" data-lang="zh">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> 中文
+            </a>
+        </div>
+    </div>
+</div>
 <div class="login-box">
     <div class="card card-outline card-primary shadow">
         <div class="card-header text-center">
@@ -39,20 +55,20 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Username" name="username"
-                               data-error="Please input your username" required
+                               data-error="Please input your username" data-i18n-placeholder="Username" data-i18n-error="Please input your username" required
                                autofocus
                                {% if username %}value="{{ username }}" {% endif %}>
                         <span class="help-block with-errors"></span>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Password" name="password"
-                               data-error="Please input your password" required
+                               data-error="Please input your password" data-i18n-placeholder="Password" data-i18n-error="Please input your password" required
                                {% if password %}value="{{ password }}" {% endif %}>
                         <span class="help-block with-errors"></span>
                     </div>
                     {% if SETTING.get('otp_field_enabled') %}
                         <div class="form-group">
-                            <input type="otptoken" class="form-control" placeholder="OTP Token" name="otptoken"
+                            <input type="otptoken" class="form-control" placeholder="OTP Token" data-i18n-placeholder="OTP Token" name="otptoken"
                                    autocomplete="off">
                         </div>
                     {% endif %}
@@ -60,15 +76,15 @@
                         <div class="form-group">
                             <select class="form-control" name="auth_method">
                                 <option value="LOCAL">
-                                    LOCAL Authentication
+                                    <span data-i18n="LOCAL Authentication">LOCAL Authentication</span>
                                 </option>
                                 {% if SETTING.get('login_ldap_first') %}
                                     <option value="LDAP" selected="selected">
-                                        LDAP Authentication
+                                        <span data-i18n="LDAP Authentication">LDAP Authentication</span>
                                     </option>
                                 {% else %}
                                     <option value="LDAP">
-                                        LDAP Authentication
+                                        <span data-i18n="LDAP Authentication">LDAP Authentication</span>
                                     </option>
                                 {% endif %}
                             </select>
@@ -91,12 +107,12 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" name="remember" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    <span data-i18n="Remember Me">Remember Me</span>
                                 </label>
                             </div>
                         </div>
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block"><span data-i18n="Sign In">Sign In</span></button>
                         </div>
                     </div>
                 </form>
@@ -104,52 +120,52 @@
             {% if SETTING.get('google_oauth_enabled') or SETTING.get('github_oauth_enabled') or SETTING.get('oidc_oauth_enabled') or SETTING.get('azure_oauth_enabled') %}
                 <div class="social-auth-links text-center">
                     {% if SETTING.get('ldap_enabled') or SETTING.get('local_db_enabled') %}
-                        <p>- OR -</p>
+                        <p data-i18n="- OR -">- OR -</p>
                     {% endif %}
                     {% if SETTING.get('oidc_oauth_enabled') %}
                         <a href="{{ url_for('index.oidc_login') }}"
                            class="btn btn-block btn-social btn-openid btn-flat">
                             <i class="fa-brands fa-openid"></i>
-                            Sign in using OpenID Connect
+                            <span data-i18n="Sign in using OpenID Connect">Sign in using OpenID Connect</span>
                         </a>
                     {% endif %}
                     {% if SETTING.get('github_oauth_enabled') %}
                         <a href="{{ url_for('index.github_login') }}"
                            class="btn btn-block btn-social btn-github btn-flat">
                             <i class="fa-brands fa-github"></i>
-                            Sign in using Github
+                            <span data-i18n="Sign in using Github">Sign in using Github</span>
                         </a>
                     {% endif %}
                     {% if SETTING.get('google_oauth_enabled') %}
                         <a href="{{ url_for('index.google_login') }}"
                            class="btn btn-block btn-social btn-google btn-flat">
                             <i class="fa-brands fa-google"></i>
-                            Sign in using Google
+                            <span data-i18n="Sign in using Google">Sign in using Google</span>
                         </a>
                     {% endif %}
                     {% if SETTING.get('azure_oauth_enabled') %}
                         <a href="{{ url_for('index.azure_login') }}"
                            class="btn btn-block btn-social btn-microsoft btn-flat">
                             <i class="fa-brands fa-windows"></i>
-                            Sign in using Microsoft Azure
+                            <span data-i18n="Sign in using Microsoft Azure">Sign in using Microsoft Azure</span>
                         </a>
                     {% endif %}
                 </div>
             {% endif %}
             {% if saml_enabled %}
                 <a href="{{ url_for('index.saml_login') }}">
-                    SAML login
+                    <span data-i18n="SAML login">SAML login</span>
                 </a>
             {% endif %}
             {% if SETTING.get('signup_enabled') %}
                 <br>
                 <a href="{{ url_for('index.register') }}" class="text-center">
-                    Create an account
+                    <span data-i18n="Create an account">Create an account</span>
                 </a>
                 {% if SETTING.get('verify_user_email') %}
                     <br/>
                     <a href="{{ url_for('index.resend_confirmation_email') }}" class="text-center">
-                        Resend confirmation email
+                        <span data-i18n="Resend confirmation email">Resend confirmation email</span>
                     </a>
                 {% endif %}
             {% endif %}
@@ -160,7 +176,7 @@
 </div>
 <!-- /.login-box -->
 <div class="text-center pt-3">
-    <p>Powered by <a href="https://powerdnsadmin.org" target="_blank">PowerDNS-Admin</a></p>
+    <p><span data-i18n="Powered by">Powered by</span> <a href="https://powerdnsadmin.org" target="_blank">PowerDNS-Admin</a></p>
 </div>
 {% assets "js_login" -%}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>

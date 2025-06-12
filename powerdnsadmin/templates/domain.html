@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% block title %}<title>Zone Records - {{ domain.name | pretty_domain_name }} - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Zone Records">Zone Records</span> - {{ domain.name | pretty_domain_name }} - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Zone Records - {{ domain.name | pretty_domain_name }}</h1>
+                    <h1 class="m-0 text-dark"><span data-i18n="Zone Records">Zone Records</span> - {{ domain.name | pretty_domain_name }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Zone Records - {{ domain.name | pretty_domain_name }}</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><span data-i18n="Zone Records">Zone Records</span> - {{ domain.name | pretty_domain_name }}</li>
                     </ol>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="card" id="unsaved-changes-card" style="display: none; position: sticky; top: 0; z-index: 999;">
                 <div class="card-header" style="background-color: yellow;">
                     <h3 class="card-title" style="color: red;">
-                        Warning: Unsaved Changes
+                        <span data-i18n="Warning: Unsaved Changes">Warning: Unsaved Changes</span>
                     </h3>
                 </div>
                 <div class="card-body" style="font-size: 1rem; color: black; background-color: yellow;">
@@ -35,42 +35,42 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Zone Editor</h3>
+                            <h3 class="card-title" data-i18n="Zone Editor">Zone Editor</h3>
                             <div class="card-tools">
                                 {% if current_user.role.name in ['Administrator', 'Operator'] %}
-                                    <button type="button" title="Zone Settings"
+                                    <button type="button" data-i18n-title="Zone Settings" title="Zone Settings"
                                             class="btn btn-primary btn-danger mt-2 mb-2"
                                             onclick="window.location.href='{{ url_for('domain.setting', domain_name=domain.name) }}'">
                                         <i class="fa-solid fa-toolbox"></i>
-                                        &nbsp;Zone Settings
+                                        &nbsp;<span data-i18n="Zone Settings">Zone Settings</span>
                                     </button>
                                 {% endif %}
                                 {% if current_user.role.name in ['Administrator', 'Operator'] or allow_user_view_history %}
-                                    <button type="button" title="Zone Changelog"
+                                    <button type="button" data-i18n-title="Zone Changelog" title="Zone Changelog"
                                             class="btn btn-primary ml-2 mt-2 mb-2 button_changelog" id="{{ domain.name }}">
                                         <i class="fa-solid fa-history" aria-hidden="true"></i>
-                                        &nbsp;Changelog
+                                        &nbsp;<span data-i18n="Changelog">Changelog</span>
                                     </button>
                                 {% endif %}
                                 {% if domain.type != 'Slave' %}
-                                    <button type="button" title="Add Record"
+                                    <button type="button" data-i18n-title="Add Record" title="Add Record"
                                             class="btn btn-primary ml-2 mt-2 mb-2 button_add_record" id="{{ domain.name }}">
                                         <i class="fa-solid fa-plus"></i>
-                                        &nbsp;Add Record
+                                        &nbsp;<span data-i18n="Add Record">Add Record</span>
                                     </button>
-                                    <button type="button" title="Save Changes"
+                                    <button type="button" data-i18n-title="Save Changes" title="Save Changes"
                                             class="btn btn-primary ml-2 mt-2 mb-2 button_apply_changes"
                                             id="{{ domain.name }}"
                                             value="{{ domain.serial }}">
                                         <i class="fa-solid fa-save"></i>
-                                        &nbsp;Save Changes
+                                        &nbsp;<span data-i18n="Save Changes">Save Changes</span>
                                     </button>
                                 {% else %}
-                                    <button type="button" title="Update from Primary"
+                                    <button type="button" data-i18n-title="Update from Primary" title="Update from Primary"
                                             class="btn btn-primary ml-2 mt-2 mb-2 button_update_from_primary"
                                             id="{{ domain.name }}">
                                         <i class="fa-solid fa-sync"></i>
-                                        &nbsp;Update from Primary
+                                        &nbsp;<span data-i18n="Update from Primary">Update from Primary</span>
                                     </button>
                                 {% endif %}
                             </div>
@@ -79,16 +79,16 @@
                             <table id="tbl_records" class="table table-bordered table-striped table-hover table-sm">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>TTL</th>
-                                    <th>Data</th>
+                                    <th data-i18n="Name">Name</th>
+                                    <th data-i18n="Type">Type</th>
+                                    <th data-i18n="Status">Status</th>
+                                    <th data-i18n="TTL">TTL</th>
+                                    <th data-i18n="Data">Data</th>
                                     {% if domain.type != 'Slave' %}
-                                        <th>Comment</th>
-                                        <th>Actions</th>
+                                        <th data-i18n="Comment">Comment</th>
+                                        <th data-i18n="Actions">Actions</th>
                                     {% else %}
-                                        <th>Invisible Sorting Column</th>
+                                        <th data-i18n="Invisible Sorting Column">Invisible Sorting Column</th>
                                     {% endif %}
                                 </tr>
                                 </thead>
@@ -104,7 +104,7 @@
                                             <td>{{ record.comment }}</td>
                                             <td>
                                                 {% if record.is_allowed_edit() %}
-                                                    <button type="button" title="Edit" class="btn btn-sm btn-warning button_edit">
+                                                    <button type="button" data-i18n-title="Edit" title="Edit" class="btn btn-sm btn-warning button_edit">
                                                         <i class="fa-solid fa-edit"></i>
                                                     </button>
                                                 {% else %}
@@ -113,12 +113,12 @@
                                                     </button>
                                                 {% endif %}
                                                 {% if record.is_allowed_delete() %}
-                                                    <button type="button" title="Delete" class="btn btn-sm btn-danger button_delete">
+                                                    <button type="button" data-i18n-title="Delete" title="Delete" class="btn btn-sm btn-danger button_delete">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 {% endif %}
                                                 {% if current_user.role.name in ['Administrator', 'Operator'] or allow_user_view_history %}
-                                                    <button type="button" title="Changelog"
+                                                    <button type="button" data-i18n-title="Changelog" title="Changelog"
                                                             onclick="show_record_changelog('{{ record.name }}','{{ record.type }}',event)"
                                                             class="btn btn-primary btn-sm">
                                                         <i class="fa-solid fa-history" aria-hidden="true"></i>
@@ -689,7 +689,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Confirmation</h4>
+                    <h4 class="modal-title" data-i18n="Confirmation">Confirmation</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -699,11 +699,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary pull-left" id="button_delete_cancel"
-                            data-dismiss="modal">
-                        <i class="fa-solid fa-window-close"></i>&nbsp;Close
+                            data-dismiss="modal" data-i18n-title="Close" title="Close">
+                        <i class="fa-solid fa-window-close"></i>&nbsp;<span data-i18n="Close">Close</span>
                     </button>
-                    <button type="button" class="btn btn-danger" id="button_delete_confirm">
-                        <i class="fa-solid fa-trash"></i>&nbsp;Delete
+                    <button type="button" class="btn btn-danger" id="button_delete_confirm" data-i18n-title="Delete" title="Delete">
+                        <i class="fa-solid fa-trash"></i>&nbsp;<span data-i18n="Delete">Delete</span>
                     </button>
                 </div>
             </div>
@@ -714,7 +714,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Confirmation</h4>
+                    <h4 class="modal-title" data-i18n="Confirmation">Confirmation</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -723,11 +723,11 @@
                     <p></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        <i class="fa-solid fa-window-close"></i>&nbsp;Close
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-i18n-title="Close" title="Close">
+                        <i class="fa-solid fa-window-close"></i>&nbsp;<span data-i18n="Close">Close</span>
                     </button>
-                    <button type="button" class="btn btn-success" id="button_apply_confirm">
-                        <i class="fa-solid fa-save"></i>&nbsp;Apply Changes
+                    <button type="button" class="btn btn-success" id="button_apply_confirm" data-i18n-title="Apply Changes" title="Apply Changes">
+                        <i class="fa-solid fa-save"></i>&nbsp;<span data-i18n="Apply Changes">Apply Changes</span>
                     </button>
                 </div>
             </div>
@@ -738,7 +738,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Custom Record</h4>
+                    <h4 class="modal-title" data-i18n="Custom Record">Custom Record</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -747,11 +747,11 @@
                     <p></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        <i class="fa-solid fa-window-close"></i>&nbsp;Close
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-i18n-title="Close" title="Close">
+                        <i class="fa-solid fa-window-close"></i>&nbsp;<span data-i18n="Close">Close</span>
                     </button>
-                    <button type="button" class="btn btn-success" id="button_save">
-                        <i class="fa-solid fa-save"></i>&nbsp;Save
+                    <button type="button" class="btn btn-success" id="button_save" data-i18n-title="Save" title="Save">
+                        <i class="fa-solid fa-save"></i>&nbsp;<span data-i18n="Save">Save</span>
                     </button>
                 </div>
             </div>
@@ -761,14 +761,14 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Unsaved Changes</h5>
+            <h5 class="modal-title" data-i18n="Unsaved Changes">Unsaved Changes</h5>
           </div>
           <div class="modal-body">
-            <p>You have unsaved changes. Are you sure you want to navigate away?</p>
+            <p data-i18n="You have unsaved changes. Are you sure you want to navigate away?">You have unsaved changes. Are you sure you want to navigate away?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="stay">Stay</button>
-            <button type="button" class="btn btn-secondary" id="leave">Leave</button>
+            <button type="button" class="btn btn-primary" id="stay" data-i18n="Stay" data-i18n-title="Stay" title="Stay">Stay</button>
+            <button type="button" class="btn btn-secondary" id="leave" data-i18n="Leave" data-i18n-title="Leave" title="Leave">Leave</button>
           </div>
         </div>
       </div>

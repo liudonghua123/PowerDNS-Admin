@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% set active_page = "remove_domain" %}
-{% block title %}<title>Remove Zone - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title><span data-i18n="Remove Zone">Remove Zone</span> - {{ SITE_NAME }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">
+                    <h1 class="m-0 text-dark" data-i18n="Remove Zone">
                         Remove Zone
                     </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Remove Zone</li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('dashboard.dashboard') }}" data-i18n="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active" data-i18n="Remove Zone">Remove Zone</li>
                     </ol>
                 </div>
             </div>
@@ -29,15 +29,15 @@
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="card card-outline card-primary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Zone Selector</h3>
+                            <h3 class="card-title" data-i18n="Zone Selector">Zone Selector</h3>
                         </div>
                         <form role="form" method="post" action="{{ url_for('domain.remove') }}">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="domainid">Zone</label>
+                                    <label for="domainid" data-i18n="Zone">Zone</label>
                                     <select id=domainid class="form-control" style="width:15em;">
-                                        <option value="0">- Select Zone -</option>
+                                        <option value="0" data-i18n="- Select Zone -">- Select Zone -</option>
                                         {% for domain in domainss %}
                                             <option value="{{ domain.id }}">{{ domain.name }}</option>
                                         {% endfor %}
@@ -46,12 +46,12 @@
                             </div>
                             <div class="card-footer">
                                 <button type="button" title="Cancel" class="btn btn-secondary"
-                                        onclick="window.location.href='{{ url_for('dashboard.dashboard') }}'">
-                                    <i class="fa-solid fa-window-close"></i>&nbsp;Cancel
+                                        onclick="window.location.href='{{ url_for('dashboard.dashboard') }}'" data-i18n-title="Cancel">
+                                    <i class="fa-solid fa-window-close"></i>&nbsp;<span data-i18n="Cancel">Cancel</span>
                                 </button>
                                 <button type="button" title="Remove Zone"
-                                        class="btn btn-danger button_delete float-right">
-                                    <i class="fa-solid fa-trash-alt"></i>&nbsp;Remove Zone
+                                        class="btn btn-danger button_delete float-right" data-i18n-title="Remove Zone">
+                                    <i class="fa-solid fa-trash-alt"></i>&nbsp;<span data-i18n="Remove Zone">Remove Zone</span>
                                 </button>
                             </div>
                         </form>
@@ -60,12 +60,12 @@
                 <div class="col-12 col-sm-6 col-lg-8">
                     <div class="card card-outline card-secondary shadow">
                         <div class="card-header">
-                            <h3 class="card-title">Zone Selector Help</h3>
+                            <h3 class="card-title" data-i18n="Zone Selector Help">Zone Selector Help</h3>
                         </div>
                         <div class="card-body">
                             <dl class="dl-horizontal">
-                                <dt>Zone</dt>
-                                <dd>Select the zone you wish to remove from the system.</dd>
+                                <dt data-i18n="Zone">Zone</dt>
+                                <dd data-i18n="Select the zone you wish to remove from the system">Select the zone you wish to remove from the system.</dd>
                             </dl>
                             <p>Find more details at <a href="https://docs.powerdns.com/md/" target="_blank">https://docs.powerdns.com/md/</a>
                             </p>
@@ -83,13 +83,13 @@
         $(document.body).on("click", ".button_delete", function (e) {
             e.stopPropagation();
             if ($("#domainid").val() == 0) {
-                showErrorModal("Please select zone to remove.");
+                showErrorModal(i18n.t("Please select zone to remove"));
                 return;
             }
 
             var modal = $("#modal_delete");
             var domain = $("#domainid option:selected").text();
-            var info = "Are you sure you want to delete the zone " + domain + "?";
+            var info = i18n.t("Are you sure you want to delete the zone") + " " + domain + "?";
             modal.find('.modal-body p').text(info);
             modal.find('#button_delete_confirm').click(function () {
                 $.post($SCRIPT_ROOT + '/domain/remove', {

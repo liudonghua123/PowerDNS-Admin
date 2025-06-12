@@ -18,9 +18,11 @@ css_login = Bundle(
 
 js_login = Bundle(
     'node_modules/jquery/dist/jquery.js',
-    'node_modules/bootstrap/dist/js/bootstrap.js',
+    'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
     'node_modules/icheck/icheck.js',
     'node_modules/knockout/build/output/knockout-latest.js',
+    'custom/js/i18n.js',
+    'custom/js/language-switcher.js',
     'custom/js/custom.js',
     filters=(ConcatFilter, 'rjsmin'),
     output='generated/login.js')
@@ -61,6 +63,7 @@ js_main = Bundle(
     'custom/js/i18n.js',
     'custom/js/language-switcher.js',
     'custom/js/app-authentication-settings-editor.js',
+    'custom/js/pdns.js',
     'custom/js/custom.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     filters=(ConcatFilter, 'rjsmin'),

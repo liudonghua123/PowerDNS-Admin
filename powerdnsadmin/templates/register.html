@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html id="html-root">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Register - {{ SITE_NAME }}</title>
+    <title><span data-i18n="Register">Register</span> - {{ SITE_NAME }}</title>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -14,6 +14,22 @@
 </head>
 
 <body class="hold-transition register-page">
+<!-- Language Switcher -->
+<div class="language-switcher" style="position: absolute; top: 10px; right: 10px;">
+    <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-language"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
+            <a href="#" class="dropdown-item lang-select" data-lang="en">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> English
+            </a>
+            <a href="#" class="dropdown-item lang-select" data-lang="zh">
+                <i class="fa-solid fa-check mr-2 lang-check" style="visibility: hidden;"></i> 中文
+            </a>
+        </div>
+    </div>
+</div>
 <div class="register-box">
     <div class="card card-outline card-primary shadow">
         <div class="card-header text-center">
@@ -32,7 +48,7 @@
                     {{ error }}
                 </div>
             {% endif %}
-            <p class="login-box-msg">Enter your personal details below</p>
+            <p class="login-box-msg" data-i18n="Enter your personal details below">Enter your personal details below</p>
             <form action="{{ url_for('index.register') }}" method="post" validator>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 
@@ -45,12 +61,12 @@
                         </div>
                         <input type="text"
                                class="form-control {{ 'is-invalid' if 'firstname' in error_messages else '' }}"
-                               placeholder="First Name" name="firstname" id="firstname"
+                               placeholder="First Name" data-i18n-placeholder="First Name" name="firstname" id="firstname"
                                value="{{ request.form.firstname }}" required>
                         {% if 'firstname' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['firstname'] }}
+                                <span data-i18n-error="firstname">{{ error_messages['firstname'] }}</span>
                             </div>
                         {% endif %}
                     </div>
@@ -65,12 +81,12 @@
                         </div>
                         <input type="text"
                                class="form-control {{ 'is-invalid' if 'lastname' in error_messages else '' }}"
-                               placeholder="Last name" name="lastname" id="lastname" value="{{ request.form.lastname }}"
+                               placeholder="Last name" data-i18n-placeholder="Last name" name="lastname" id="lastname" value="{{ request.form.lastname }}"
                                required>
                         {% if 'lastname' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['lastname'] }}
+                                <span data-i18n-error="lastname">{{ error_messages['lastname'] }}</span>
                             </div>
                         {% endif %}
                     </div>
@@ -84,17 +100,17 @@
                   </span>
                         </div>
                         <input type="email" class="form-control {{ 'is-invalid' if 'email' in error_messages else '' }}"
-                               placeholder="Email" name="email" id="email" value="{{ request.form.email }}" required>
+                               placeholder="Email" data-i18n-placeholder="Email" name="email" id="email" value="{{ request.form.email }}" required>
                         {% if 'email' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['email'] }}
+                                <span data-i18n-error="email">{{ error_messages['email'] }}</span>
                             </div>
                         {% endif %}
                     </div>
                 </div>
 
-                <p class="login-box-msg">Enter your account details below</p>
+                <p class="login-box-msg" data-i18n="Enter your account details below">Enter your account details below</p>
 
                 <div class="form-group">
                     <div class="input-group">
@@ -105,12 +121,12 @@
                         </div>
                         <input type="text"
                                class="form-control {{ 'is-invalid' if 'username' in error_messages else '' }}"
-                               placeholder="Username" name="username" id="username" value="{{ request.form.username }}"
+                               placeholder="Username" data-i18n-placeholder="Username" name="username" id="username" value="{{ request.form.username }}"
                                required>
                         {% if 'username' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['username'] }}
+                                <span data-i18n-error="username">{{ error_messages['username'] }}</span>
                             </div>
                         {% endif %}
                     </div>
@@ -125,11 +141,11 @@
                         </div>
                         <input type="password"
                                class="form-control {{ 'is-invalid' if 'password' in error_messages else '' }}"
-                               placeholder="Password" id="password" name="password" required>
+                               placeholder="Password" data-i18n-placeholder="Password" id="password" name="password" required>
                         {% if 'password' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['password'] }}
+                                <span data-i18n-error="password">{{ error_messages['password'] }}</span>
                             </div>
                         {% endif %}
                     </div>
@@ -144,18 +160,18 @@
                         </div>
                         <input type="password"
                                class="form-control {{ 'is-invalid' if 'rpassword' in error_messages else '' }}"
-                               placeholder="Retype password" id="rpassword" name="rpassword" required>
+                               placeholder="Retype password" data-i18n-placeholder="Retype password" id="rpassword" name="rpassword" required>
                         {% if 'rpassword' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['rpassword'] }}
+                                <span data-i18n-error="rpassword">{{ error_messages['rpassword'] }}</span>
                             </div>
                         {% endif %}
                     </div>
                 </div>
 
                 {% if captcha_enable %}
-                    <p class="login-box-msg">Please complete the CAPTCHA below</p>
+                    <p class="login-box-msg" data-i18n="Please complete the CAPTCHA below">Please complete the CAPTCHA below</p>
                     <div class="form-group">
                     {{ captcha() }}
                     <div class="input-group">
@@ -166,11 +182,11 @@
                         </div>
                         <input type="text"
                                class="form-control {{ 'is-invalid' if 'captcha_result' in error_messages else '' }}"
-                               placeholder="CAPTCHA" id="captcha" name="captcha" required>
+                               placeholder="CAPTCHA" data-i18n-placeholder="CAPTCHA" id="captcha" name="captcha" required>
                         {% if 'captcha_result' in error_messages %}
                             <div class="invalid-feedback">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ error_messages['captcha_result'] }}
+                                <span data-i18n-error="captcha_result">{{ error_messages['captcha_result'] }}</span>
                             </div>
                         {% endif %}
                     </div>
@@ -178,8 +194,8 @@
 
                 <div class="row">
                     <div class="d-flex justify-content-between mx-auto mt-3">
-                        <button type="button" class="btn btn-secondary" id="button_back">Back</button>
-                        <button type="submit" class="btn btn-primary btn-block mx-3">Register</button>
+                        <button type="button" class="btn btn-secondary" id="button_back" data-i18n="Back">Back</button>
+                        <button type="submit" class="btn btn-primary btn-block mx-3" data-i18n="Register">Register</button>
                     </div>
                 </div>
             </form>
@@ -190,7 +206,7 @@
 </div>
 <!-- /.register-box -->
 <div class="text-center pt-3">
-    <p>Powered by <a href="https://powerdnsadmin.org" target="_blank">PowerDNS-Admin</a></p>
+    <p><span data-i18n="Powered by">Powered by</span> <a href="https://powerdnsadmin.org" target="_blank">PowerDNS-Admin</a></p>
 </div>
 {% assets "js_login" -%}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>

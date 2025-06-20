@@ -23,6 +23,61 @@
 </head>
 
 <body class="hold-transition sidebar-mini {% if not SETTING.get('fullscreen_layout') %}layout-boxed{% endif %}">
+<style>
+    .main-sidebar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .main-sidebar .nav-link i {
+      color: #fff;
+    }
+    .main-sidebar .nav-link:hover i {
+      color: #ffcc00;
+    }
+
+    .content-wrapper {
+      background-color: #f4f6f900;
+    }
+    
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      z-index: -10;
+    }
+    body {
+      background: transparent !important;
+    }
+    .wrapper {
+      position: relative;
+      z-index: 1;
+    }
+</style>
+<div id="particles-js"></div>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  particlesJS('particles-js', {
+    particles: {
+      number: { value: 80, density: { enable: true, value_area: 800 } },
+      color: { value: "#333333" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5, random: true },
+      size: { value: 3, random: true },
+      line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+      move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" }
+      }
+    }
+  });
+</script>
 {% set user_image_url = url_for('user.image', username=current_user.username) %}
 <div class="wrapper">
     {% block pageheader %}

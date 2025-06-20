@@ -7,7 +7,7 @@
     {% set action_label = 'Edit' %}
     {% set form_action = url_for('admin.edit_user', user_username=user.username) %}
 {% endif %}
-{% block title %}<title><span data-i18n="{{ action_label }} User">{{ action_label }} User</span> - {{ SITE_NAME }}</title>{% endblock %}
+{% block title %}<title>{{ SITE_NAME }} - {{ action_label }} User</title>{% endblock %}
 
 {% block dashboard_stat %}
     <div class="content-header">

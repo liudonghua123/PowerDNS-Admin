@@ -63,7 +63,7 @@
     <aside class="main-sidebar sidebar-dark-primary">
         <!-- Logo -->
         <a href="{{ url_for('index.index') }}" class="brand-link">
-            <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="PowerDNS-Admin FavIcon"
+            <img src="{{ url_for('static', filename=SETTING.get('custom_logo_path')) }}" alt="PowerDNS-Admin FavIcon"
                  class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">
         {% if SETTING.get('site_name') %}
@@ -239,7 +239,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong><a href="https://github.com/PowerDNS-Admin/PowerDNS-Admin">PowerDNS-Admin</a></strong> - <span data-i18n="A PowerDNS web interface with advanced features">A PowerDNS web interface with advanced features</span>.
+        <strong><a href="https://github.com/PowerDNS-Admin/PowerDNS-Admin">{{ SETTING.get('site_name') }}</a></strong> - <span data-i18n="A PowerDNS web interface with advanced features">A PowerDNS web interface with advanced features</span>.
         <span class="float-right">Version 0.4.2</span>
     </footer>
 </div>
